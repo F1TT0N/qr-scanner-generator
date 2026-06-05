@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Scanner &amp; Generator - Mixed Reality QR Tool for Meta Quest 3 / 3S</title>
+<meta name="description" content="QR Scanner & Generator for Meta Quest 3 and 3S. Scan and create QR codes in mixed reality using passthrough. Fast, hands-free, with smart actions, history and link safety.">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#070612; color:#e6eef7; overflow-x:hidden; }
+  .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center;
+          justify-content:center; text-align:center; position:relative; padding:40px 20px; }
+  .hero::before { content:''; position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 600px 500px at 25% 35%, rgba(34,211,238,.12), transparent),
+      radial-gradient(ellipse 520px 420px at 75% 30%, rgba(255,60,214,.08), transparent),
+      radial-gradient(ellipse 600px 500px at 50% 80%, rgba(120,90,235,.07), transparent); }
+  .logo-icon { width:150px; height:150px; margin-bottom:28px; }
+  .logo-icon svg { width:100%; height:100%; }
+  h1 { font-size:2.9rem; font-weight:900; letter-spacing:4px;
+       background:linear-gradient(135deg,#22d3ee,#67e8f9,#ff3cd6);
+       -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+       margin-bottom:10px; }
+  .subtitle { font-size:1.2rem; color:#7f8ba3; letter-spacing:5px; margin-bottom:26px; }
+  .tagline { font-size:1.1rem; color:#a9b6cc; max-width:620px; line-height:1.8; margin-bottom:38px; }
+  .cta-btn { display:inline-block; padding:15px 44px; background:linear-gradient(135deg,#22d3ee,#0ea5b7);
+             color:#04121a; text-decoration:none; border-radius:50px; font-size:1.05rem; font-weight:700;
+             letter-spacing:2px; transition:transform .3s, box-shadow .3s; }
+  .cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(34,211,238,.4); }
+  .divider { width:300px; height:2px; margin:0 auto;
+             background:linear-gradient(90deg,transparent,#22d3ee,transparent); }
+  .features { padding:80px 20px; max-width:1100px; margin:0 auto; }
+  .features h2 { text-align:center; font-size:2rem; color:#fff; margin-bottom:56px; letter-spacing:4px; }
+  .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px; }
+  .feature-card { background:rgba(255,255,255,.03); border:1px solid rgba(34,211,238,.10);
+                  border-radius:16px; padding:34px 30px; transition:transform .3s, border-color .3s; }
+  .feature-card:hover { transform:translateY(-4px); border-color:rgba(34,211,238,.4); }
+  .feature-icon { font-size:2.1rem; margin-bottom:14px; }
+  .feature-card h3 { font-size:1.18rem; color:#fff; margin-bottom:9px; }
+  .feature-card p { color:#90a0ba; line-height:1.7; font-size:.95rem; }
+  .footer { padding:40px 20px; text-align:center; border-top:1px solid rgba(255,255,255,.05); }
+  .footer-links { margin-bottom:18px; }
+  .footer-links a { color:#22d3ee; text-decoration:none; margin:0 18px; font-size:.92rem; }
+  .footer-links a:hover { text-decoration:underline; }
+  .footer p { color:#55617a; font-size:.85rem; }
+  .note { color:#67748f; font-size:.82rem; margin-top:14px; }
+  @media (max-width:768px){ h1{font-size:2.1rem;letter-spacing:3px;} .subtitle{font-size:.95rem;letter-spacing:3px;} .features-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="logo-icon">
+    <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#22d3ee"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient></defs>
+      <g fill="url(#g)">
+        <rect x="34" y="30" width="16" height="16" rx="3"/><rect x="56" y="30" width="16" height="16" rx="3"/>
+        <rect x="92" y="30" width="16" height="16" rx="3"/><rect x="34" y="52" width="16" height="16" rx="3"/>
+        <rect x="78" y="52" width="16" height="16" rx="3"/><rect x="114" y="52" width="14" height="14" rx="3" fill="#ff3cd6"/>
+        <rect x="56" y="74" width="16" height="16" rx="3"/><rect x="100" y="86" width="16" height="16" rx="3"/>
+        <rect x="34" y="100" width="16" height="16" rx="3"/><rect x="78" y="108" width="14" height="14" rx="3" fill="#ff3cd6"/>
+        <rect x="112" y="104" width="16" height="16" rx="3"/>
+      </g>
+      <polygon points="80,44 90,70 118,70 95,86 104,114 80,98 56,114 65,86 42,70 70,70"
+               fill="rgba(8,8,16,.92)" stroke="#22d3ee" stroke-width="4" stroke-linejoin="round"/>
+      <text x="80" y="86" font-family="Consolas,monospace" font-size="26" font-weight="bold"
+            fill="#eef6ff" text-anchor="middle">QR</text>
+      <g stroke="#0ea5b7" stroke-width="4" fill="none" stroke-linecap="round">
+        <path d="M14,34 L14,14 L34,14"/><path d="M126,14 L146,14 L146,34"/>
+        <path d="M14,126 L14,146 L34,146"/><path d="M126,146 L146,146 L146,126"/></g>
+    </svg>
+  </div>
+  <h1>QR SCANNER &amp; GENERATOR</h1>
+  <div class="subtitle">MIXED REALITY &middot; QUEST 3 / 3S</div>
+  <p class="tagline">Scan and create QR codes in mixed reality with your Meta Quest 3 or Quest 3S.
+  Point at any code to detect it instantly through passthrough, then open links, join Wi-Fi, save
+  contacts and more &ndash; or generate your own codes, all in a sleek holographic HUD.</p>
+  <a href="https://discord.gg/Za4PstNDvn" class="cta-btn">JOIN OUR DISCORD</a>
+</section>
+
+<div class="divider"></div>
+
+<section class="features" id="features">
+  <h2>FEATURES</h2>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon">&#128247;</div>
+      <h3>Mixed Reality Scanning</h3>
+      <p>See the real world through passthrough while scanning QR codes and barcodes naturally &ndash; no phone needed. Just look at any code and it's instantly detected.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#10024;</div>
+      <h3>Built-in Generator</h3>
+      <p>Create your own QR codes for links, Wi-Fi networks and text using an in-VR keyboard, then save them to your headset's Downloads folder.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#9889;</div>
+      <h3>Smart Actions</h3>
+      <p>One tap to open links, join Wi-Fi, add contacts, dial numbers, open maps or add calendar events &ndash; powered by on-device Google ML Kit.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#128737;</div>
+      <h3>Link Safety Check</h3>
+      <p>An offline safety check warns you about suspicious links &ndash; phishing, look-alike domains and login/token payloads &ndash; before you open them.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#128203;</div>
+      <h3>History &amp; Export</h3>
+      <p>Browse everything you've scanned and generated, mark favorites, add notes, and export your history to PDF, CSV, JSON or TXT.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#129513;</div>
+      <h3>Holographic HUD</h3>
+      <p>A multi-panel holographic workspace you can grab and arrange around you. Comfortable and stationary &ndash; works seated or standing.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="https://discord.gg/Za4PstNDvn">Discord</a>
+    <a href="mailto:greycidolores@gmail.com">Contact</a>
+  </div>
+  <p>&copy; 2026 Anwar Studio Official. All rights reserved.</p>
+  <p class="note">Scanning uses Meta's Passthrough Camera API and requires Quest 3 or Quest 3S.</p>
+</footer>
+</body>
+</html>
